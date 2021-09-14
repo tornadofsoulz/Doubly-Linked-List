@@ -17,21 +17,30 @@ impl<T> List<T> {
     }
 
     pub fn pushback(&mut self, value: T) {
-        let new_node = Box::new(Node {
-            data: value,
-            next: self.tail.take(),
-            previous: self.head.take(),
-        });
-        self.tail = Some(new_node);
+        match self.head {
+            None => { }
+            _ => { let new_node = Box::new(Node {
+                    data: value,
+                    next: self.tail.take(),
+                    previous: self.head.take(),
+                });
+                self.tail = Some(new_node);
+            }
+        }
     }
 
     pub fn pushfront(&mut self, value: T) {
-        let new_node = Box::new(Node {
-            data: value,
-            next: self.tail.take(),
-            previous: self.head.take(),
-        });
-        self.head = Some(new_node);
+        match self.tail {
+            None => { }
+            _ => {let new_node = Box::new(Node {
+                data: value,
+                next: self.tail.take(),
+                previous: self.head.take(),
+            });
+                self.head = Some(new_node);
+            }
+        }
+
     }
 
     pub fn rm(&mut self) -> Option<T> {

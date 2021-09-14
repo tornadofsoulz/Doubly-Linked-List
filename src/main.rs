@@ -20,9 +20,18 @@ impl<T> List<T> {
         let new_node = Box::new(Node {
             data: value,
             next: self.tail.take(),
-            previous: self.head.take()//todo чтобы указывал на предыдущую ноду
+            previous: self.head.take(),
         });
         self.tail = Some(new_node);
+    }
+
+    pub fn pushfront(&mut self, value: T) {
+        let new_node = Box::new(Node {
+            data: value,
+            next: self.tail.take(),
+            previous: self.head.take(),
+        });
+        self.head = Some(new_node);
     }
 
     pub fn rm(&mut self) -> Option<T> {
